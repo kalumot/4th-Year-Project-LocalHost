@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'ammamanager/gyms/_header.html' with active='new' %}
+  <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Nickname</th>
+          <th>Wins</th>
+          <th>Losses</th>
+          <th>Draws</th>
+          <th>No Contests</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for fighter in fighters.all %}
+          <tr>
+            <td class="align-middle">{{ fighter.fname }} {{fighter.lname}}</td>
+            <td class="align-middle">{{ fighter.nname }}</td>
+            <td class="align-middle">{{ fighter.wins }}</td>
+            <td class="align-middle">{{ fighter.losses }}</td>
+              <td class="align-middle">{{ fighter.draws }}</td>
+              <td class="align-middle">{{ fighter.nc }}</td>
+            <td class="text-right">
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No fighters in the gym.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  <a href="{% url 'gyms:fighter_add' %}" class="btn btn-primary mb-3" role="button">Add Fighter</a>
+{% endblock %}

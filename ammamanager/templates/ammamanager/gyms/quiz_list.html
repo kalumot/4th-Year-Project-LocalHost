@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% include 'ammamanager/gyms/_header.html' with active='new' %}
+  <div class="card">
+    Gym Homepage
+  </div>
+  <a href="{% url 'gyms:fighter_list' %}" class="btn btn-primary mb-3" role="button">View Fighters</a>
+{% endblock %}
