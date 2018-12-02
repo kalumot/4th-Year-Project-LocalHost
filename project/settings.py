@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'ammamanager'
 ]
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
