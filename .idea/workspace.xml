@@ -5,8 +5,7 @@
       <change afterPath="$PROJECT_DIR$/../4thyearproject/requirments.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../4thyearproject/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../4thyearproject/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../4thyearproject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../4thyearproject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirments.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirments.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,8 +97,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/project/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+            <state relative-caret-position="132">
+              <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
               <folding>
                 <element signature="e#308#317#0" expanded="true" />
               </folding>
@@ -432,8 +431,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="29" column="17" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+        <state relative-caret-position="132">
+          <caret line="40" column="30" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="30" />
           <folding>
             <element signature="e#308#317#0" expanded="true" />
           </folding>
