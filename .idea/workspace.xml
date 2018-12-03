@@ -54,7 +54,7 @@
         <counts>
           <entry key="config" value="11" />
           <entry key="html" value="12" />
-          <entry key="py" value="123" />
+          <entry key="py" value="143" />
           <entry key="txt" value="10" />
         </counts>
       </usages-collector>
@@ -63,7 +63,7 @@
           <entry key="Erlang Terms" value="11" />
           <entry key="HTML" value="12" />
           <entry key="PLAIN_TEXT" value="10" />
-          <entry key="Python" value="123" />
+          <entry key="Python" value="143" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -90,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/project/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="348">
-              <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+              <caret line="42" column="25" lean-forward="true" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
               <folding>
                 <element signature="e#308#317#0" expanded="true" />
               </folding>
@@ -442,7 +442,7 @@
     <entry file="file://$PROJECT_DIR$/project/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="348">
-          <caret line="42" column="4" selection-start-line="42" selection-start-column="4" selection-end-line="42" selection-end-column="4" />
+          <caret line="42" column="25" lean-forward="true" selection-start-line="42" selection-start-column="25" selection-end-line="42" selection-end-column="25" />
           <folding>
             <element signature="e#308#317#0" expanded="true" />
           </folding>
