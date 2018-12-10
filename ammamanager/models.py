@@ -24,7 +24,8 @@ class Subject(models.Model):
 
 class Gym(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    interests = models.ManyToManyField(Subject, related_name='interested_gyms')
+    #interests = models.ManyToManyField(Subject, related_name='interested_gyms')
+    Certifications = models.ManyToManyField(Subject, related_name='interested_gyms')
 
 
     def __str__(self):

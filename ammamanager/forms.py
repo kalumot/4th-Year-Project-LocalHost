@@ -19,7 +19,7 @@ class PromotionSignUpForm(UserCreationForm):
 
 
 class GymSignUpForm(UserCreationForm):
-    interests = forms.ModelMultipleChoiceField(
+    Certifications = forms.ModelMultipleChoiceField(
         queryset=Subject.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=True
@@ -34,15 +34,15 @@ class GymSignUpForm(UserCreationForm):
         user.is_gym = True
         user.save()
         gym = Gym.objects.create(user=user)
-        gym.interests.add(*self.cleaned_data.get('interests'))
+        gym.Certifications.add(*self.cleaned_data.get('Certifications'))
         return user
 
 
 class GymInterestsForm(forms.ModelForm):
     class Meta:
         model = Gym
-        fields = ('interests', )
+        fields = ('Certifications', )
         widgets = {
-            'interests': forms.CheckboxSelectMultiple
+            'Certifications': forms.CheckboxSelectMultiple
         }
 
