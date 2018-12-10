@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'ammamanager'
-    'django-crispy-forms'
+    'ammamanager',
+    'crispy_forms',
 
 ]
 
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'ammamanager'
 ]
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
