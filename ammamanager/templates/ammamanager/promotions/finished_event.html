@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Page</title>
+    <link rel="stylesheet" href="../../../../static/css/style.css">
+</head>
+<body>
+<h2>{{ event.name }}</h2>
+<h3>Select the Winner:</h3>
+
+<table class="table mb-0">
+      <thead>
+        <tr>
+            <th>Fighter 1</th>
+            <th>Fighter 2</th>
+            <th>Final?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for bout in bouts.all %}
+        {% with bout.fighter1 as fighter1 %}
+        {% with bout.fighter2 as fighter2 %}
+          <tr>
+              <td class="align-middle"><a href="{% url 'promotions:finished_bout' event.pk bout.pk fighter1.pk %}" class="btn btn-primary mb-3" role="button">{{ bout.fighter1 }}</a></td>
+              <td class="align-middle"><a href="{% url 'promotions:finished_bout' event.pk bout.pk fighter2.pk %}" class="btn btn-primary mb-3" role="button">{{ bout.fighter2 }}</a></td>
+              <td class="align-middle">{{ bout.final }}</td>
+          </tr>{% endwith %}{% endwith %}
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No bouts in this event.</td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
+  <a href="{% url 'promotions:bout_add' event.pk %}" class="btn btn-primary mb-3" role="button">Add Bout</a>
+
+<h3>Results:</h3>
+<table class="table mb-0">
+      <thead>
+        <tr>
+            <th>Winner</th>
+            <th>Round</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for f in finished.all %}
+          <tr>
+              <td class="align-middle">{{ f.winner }}</td>
+              <td class="align-middle">{{ f.round }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No finished bouts in this event.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+</body>
+</html>
+{% endblock %}

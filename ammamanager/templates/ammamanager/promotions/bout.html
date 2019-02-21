@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+            {{ bout.fighter1 }} --
+            {{ bout.weight }} --
+            {{ bout.fighter2 }}
+
+<a href="{% url 'promotions:offer_fight' event.pk bout.pk %}" class="btn btn-outline-secondary" role="button">Offer Fight</a>
+
+<table class="table mb-0">
+<thead>
+        <tr>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+<tbody>
+{% for fighter in fighters %}
+        <tr>
+         <td class="align-middle">
+             <a href="{% url 'promotions:offer' event.pk bout.pk fighter.pk %}" class="btn btn-outline-secondary" role="button">{{ fighter.fname }} {{fighter.lname}}</a></td>
+
+        </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No fighters match the requirments.</td>
+          </tr>
+        {% endfor %}
+</tbody>
+</table>
+{% endblock %}

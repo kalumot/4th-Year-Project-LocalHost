@@ -43,19 +43,11 @@ class Migration(migrations.Migration):
                 ('objects', django.contrib.auth.models.UserManager()),
             ],
         ),
-        migrations.CreateModel(
-            name='Subject',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=30)),
-                ('color', models.CharField(default='#007bff', max_length=7)),
-            ],
-        ),
+
         migrations.CreateModel(
             name='Gym',
             fields=[
                 ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to=settings.AUTH_USER_MODEL)),
-                ('interests', models.ManyToManyField(related_name='interested_gyms', to='ammamanager.Subject')),
             ],
         ),
         migrations.AddField(

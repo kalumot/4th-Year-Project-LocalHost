@@ -2,6 +2,9 @@
 
 {% block content %}
   {% include 'ammamanager/gyms/_header.html' with active='new' %}
+<form method='GET' action='/gyms/fighters/'>
+  <input type='text' name='q' placeholder='Search'>
+</form>
   <table class="table mb-0">
       <thead>
         <tr>
@@ -17,7 +20,7 @@
       <tbody>
         {% for fighter in fighters.all %}
           <tr>
-            <td class="align-middle">{{ fighter.fname }} {{fighter.lname}}</td>
+            <td class="align-middle"><a href="{% url 'gyms:fighter' fighter.pk %}">{{ fighter.fname }} {{fighter.lname}}</a></td>
             <td class="align-middle">{{ fighter.nname }}</td>
             <td class="align-middle">{{ fighter.wins }}</td>
             <td class="align-middle">{{ fighter.losses }}</td>

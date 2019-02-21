@@ -13,7 +13,7 @@ def index(request):
 def home(request):
     if request.user.is_authenticated:
         if request.user.is_promotion:
-            return redirect('promotions:quiz_change_list')
+            return redirect('promotions:promotion_home')
         else:
-            return redirect('gyms:quiz_list')
+            return redirect('gyms:gym_home')
     return render(request, 'ammamanager/home.html')

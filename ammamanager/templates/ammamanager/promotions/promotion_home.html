@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h2 class="mb-3">Promotion Homepage </h2>
+  <h3>{{user.username}}</h3>
+  <a href="{% url 'promotions:event_list' %}" class="btn btn-primary mb-3" role="button">Events</a>
+{% endblock %}

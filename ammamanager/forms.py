@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from django.forms.utils import ValidationError
 
-from ammamanager.models import (Gym, Subject, User)
+from ammamanager.models import (Gym, User, Bout, FinishedFight)
 
 
 class PromotionSignUpForm(UserCreationForm):
@@ -19,12 +19,6 @@ class PromotionSignUpForm(UserCreationForm):
 
 
 class GymSignUpForm(UserCreationForm):
-    Certifications = forms.ModelMultipleChoiceField(
-        queryset=Subject.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=True
-    )
-
     class Meta(UserCreationForm.Meta):
         model = User
 
@@ -34,15 +28,16 @@ class GymSignUpForm(UserCreationForm):
         user.is_gym = True
         user.save()
         gym = Gym.objects.create(user=user)
-        gym.Certifications.add(*self.cleaned_data.get('Certifications'))
         return user
 
 
-class GymInterestsForm(forms.ModelForm):
+class BoutForm(forms.ModelForm):
     class Meta:
-        model = Gym
-        fields = ('Certifications', )
-        widgets = {
-            'Certifications': forms.CheckboxSelectMultiple
-        }
+        model = Bout
+        fields = ('weight',)
 
+
+class FightForm(forms.ModelForm):
+    class Meta:
+        model = FinishedFight
+        fields = ('method','round','min','sec',)

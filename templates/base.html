@@ -1,15 +1,15 @@
+<!Doctype html>
 {% load static %}
-<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
       <!--<link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
-      <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+      <link rel="stylesheet" href="../static/css/style.css">
     <title>AMMA Organizer</title>
   </head>
   <body>
-
+        <header>
             <div class="col-6">
               <h1 class="logo">
                 <a href="{% url 'home' %}">
@@ -25,7 +25,7 @@
                 <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a>
               {% endif %}
             </div>
-
+        </header>
           <div class="card mb-3">
             <div class="card-body">
               {% for message in messages %}

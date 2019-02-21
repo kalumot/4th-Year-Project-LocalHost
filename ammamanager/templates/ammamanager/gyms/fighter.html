@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+           -- {{ fighter.fname }} --
+            -- {{ fighter.weight }} --
+points: {{ fighter.points }}
+<a href="{% url 'gyms:fighter_delete' fighter.pk %}" class="btn btn-outline-secondary" role="button">Delete Fighter</a>
+
+<table class="table mb-0">
+<thead>
+        <tr>
+          <th>Offers</th>
+          <th></th>
+        </tr>
+      </thead>
+<tbody>
+{% for offer in offers %}
+        <tr>
+         <td class="align-middle">
+             {{ offer.event.name }}  <a href="{% url 'gyms:accept_fight' fighter.pk offer.pk %}" class="btn btn-outline-secondary" role="button">Accept</a></td>
+        </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No offers</td>
+          </tr>
+        {% endfor %}
+</tbody>
+</table>
+{% endblock %}
