@@ -28,6 +28,7 @@ urlpatterns = [
         path('events/<int:pk>/bout/<int:bout_pk>/', promotions.BoutView, name='bout'),
         path('events/<int:pk>/bout/<int:bout_pk>/finished/<int:fighter_pk>', promotions.finished_bout, name='finished_bout'),
         path('events/<int:pk>/bout/<int:bout_pk>/offer/<int:fighter_pk>', promotions.offer, name='offer'),
+        path('events/<int:pk>/bout/<int:bout_pk>/removefighters', promotions.removeFighters, name='remove_fighters'),
         path('events/<int:pk>/bout/<int:bout_pk>/offerfight', promotions.offer_fight, name='offer_fight'),
     ], 'ammamanager'), namespace='promotions')),
 ]

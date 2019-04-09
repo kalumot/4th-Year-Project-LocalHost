@@ -1,32 +1,368 @@
-{% extends 'base.html' %}
-
 {% block content %}
 
-            {{ bout.fighter1 }} --
-            {{ bout.weight }} --
-            {{ bout.fighter2 }}
+<html class="no-js" lang="en">
 
-<a href="{% url 'promotions:offer_fight' event.pk bout.pk %}" class="btn btn-outline-secondary" role="button">Offer Fight</a>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>MMA-Helper</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts
+		============================================ -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/bootstrap.min.css">
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/font-awesome.min.css">
+    <!-- meanmenu icon CSS NEED
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/meanmenu.min.css">
+    <!-- main CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/main.css">
+    <!-- educate icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/educate-custon-icon.css">
+    <!-- mCustomScrollbar CSS NEED for notifications
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/scrollbar/jquery.mCustomScrollbar.min.css">
+    <!-- metisMenu CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/metisMenu/metisMenu.min.css">
+    <link rel="stylesheet" href="../../../../../static/css/metisMenu/metisMenu-vertical.css">
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/style.css">
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="../../../../../static/css/responsive.css">
+</head>
 
-<table class="table mb-0">
-<thead>
-        <tr>
-          <th>Name</th>
-          <th></th>
-        </tr>
-      </thead>
-<tbody>
-{% for fighter in fighters %}
-        <tr>
-         <td class="align-middle">
-             <a href="{% url 'promotions:offer' event.pk bout.pk fighter.pk %}" class="btn btn-outline-secondary" role="button">{{ fighter.fname }} {{fighter.lname}}</a></td>
+<body>
+    <!--[if lt IE 8]>
+		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+    <!-- Start Left menu area -->
+    <div class="left-sidebar-pro">
+        <nav id="sidebar" class="">
+            <div class="sidebar-header">
+                <a href="index.html"><img class="main-logo" src="../../../../../static/img/logo/logo.png" alt="" /></a>
+                <strong><a href="index.html"><img src="../../../../../static/img/logo/logosn.png" alt="" /></a></strong>
+            </div>
+            <div class="left-custom-menu-adp-wrap comment-scrollbar">
+                <nav class="sidebar-nav left-sidebar-menu-pro">
+                    <ul class="metismenu" id="menu1">
+                        <li class="active">
+                            <a href="index.html">
+								   <span class="educate-icon educate-home icon-wrap"></span>
+								   <span class="mini-click-non">Home</span>
+								</a>
 
-        </tr>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-event icon-wrap sub-icon-mg"></span> <span class="mini-click-non">Events</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">All Events</span></a></li>
+                                <li><a title="Add Professor" href="add-professor.html"><span class="mini-sub-pro">Upcoming Events</span></a></li>
+                                <li><a title="Edit Professor" href="edit-professor.html"><span class="mini-sub-pro">Finished Events</span></a></li>
+                                <li><a title="Professor Profile" href="professor-profile.html"><span class="mini-sub-pro">Add Event</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="has-arrow" href="all-professors.html" aria-expanded="false"><span class="educate-icon educate-professor icon-wrap"></span> <span class="mini-click-non">Fighters</span></a>
+                            <ul class="submenu-angle" aria-expanded="false">
+                                <li><a title="All Professors" href="all-professors.html"><span class="mini-sub-pro">All Fighters</span></a></li>
+                                <li><a title="Add Professor" href="add-professor.html"><span class="mini-sub-pro">Promotion Fighters</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </nav>
+    </div>
+    <!-- End Left menu area -->
+
+    <!-- Start Welcome area -->
+    <div class="all-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="logo-pro">
+                        <a href="index.html"><img class="main-logo" src="../../../../../static/img/logo/logo.png" alt="" /></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-advance-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-top-wraper">
+                                <div class="row">
+                                    <div class="col-lg-1 col-md-0 col-sm-1 col-xs-12">
+                                        <div class="menu-switcher-pro">
+                                            <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+													<i class="educate-icon educate-nav"></i>
+												</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-7 col-sm-6 col-xs-12">
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                                        <div class="header-right-info">
+                                            <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                                <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="educate-icon educate-bell" aria-hidden="true"></i><span class="indicator-nt"></span></a>
+                                                    <div role="menu" class="notification-author dropdown-menu animated zoomIn">
+                                                        <div class="notification-single-top">
+                                                            <h1>Notifications</h1>
+                                                        </div>
+                                                        <ul class="notification-menu">
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="fa fa-cloud edu-cloud-computing-down" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>SBG</h2>
+                                                                        <p>Conor McGregor has accepted your offer.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="fa fa-eraser edu-shield" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>AKA</h2>
+                                                                        <p>Dustin Porier has cancelled his fight.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#">
+                                                                    <div class="notification-icon">
+                                                                        <i class="fa fa-line-chart edu-analytics-arrow" aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="notification-content">
+                                                                        <span class="notification-date">16 Sept</span>
+                                                                        <h2>Victor Jara</h2>
+                                                                        <p>Please done this project as soon possible.</p>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                        <div class="notification-view">
+                                                            <a href="#">View All Notification</a>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+															<span class="admin-name">{{ user.username }}</span>
+															<i class="fa fa-angle-down edu-icon edu-down-arrow"></i>
+														</a>
+                                                    <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
+                                                        <li><a href="#"><span class="edu-icon edu-home-admin author-log-ic"></span>My Account</a>
+                                                        </li>
+                                                        <li><a href="{% url 'logout' %}"><span class="edu-icon edu-locked author-log-ic"></span>Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul class="mobile-menu-nav">
+                                        <li><a href="#">Home <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demoevent" href="#">Events <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demoevent" class="collapse dropdown-header-top">
+                                                <li><a href="all-professors.html">All Events</a>
+                                                </li>
+                                                <li><a href="add-professor.html">Upcoming Events</a>
+                                                </li>
+                                                <li><a href="edit-professor.html">Finished Events</a>
+                                                </li>
+                                                <li><a href="professor-profile.html">Add Event</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#demopro" href="#">Fighters <span class="admin-project-icon edu-icon edu-down-arrow"></span></a>
+                                            <ul id="demopro" class="collapse dropdown-header-top">
+                                                <li><a href="all-students.html">All Fighters</a>
+                                                </li>
+                                                <li><a href="add-student.html">Promotion Fighters</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu end -->
+
+        </div>
+        <div class="product-status mg-b-15">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="product-status-wrap drp-lst">
+                            <h4>{{ bout.event }}: {{ bout.weight }}
+                                {{ bout.fighter1 }} vs
+            {{ bout.fighter2 }}</h4>
+                            <div class="add-product">
+                                <a href="{% url 'promotions:offer_fight' event.pk bout.pk %}">Offer Bout</a>
+                            </div>
+                            <div class="remove-fighters">
+                                <a href="{% url 'promotions:remove_fighters' event.pk bout.pk %}">Remove Fighters</a>
+                            </div>
+                            {%if bout.fighter1 != None%}
+                            <h5>Reccomendations:</h5>
+                            <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Nickname</th>
+                                        <th>Weight</th>
+                                        <th>Rank</th>
+                                        <th>Wins</th>
+                                        <th>Losses</th>
+                                        <th>Draws</th>
+                                        <th>NC</th>
+                                    </tr>
+                                  {% for fighter in rec %}
+          <tr>
+            <td class="align-middle">{{ fighter.fname }} {{fighter.lname}}</a></td>
+            <td class="align-middle">{{ fighter.nname }}</td>
+            <td class="align-middle">{{ fighter.weight }}</td>
+            <td class="align-middle">{{ fighter.rank }}</td>
+            <td class="align-middle">{{ fighter.wins }}</td>
+            <td class="align-middle">{{ fighter.losses }}</td>
+              <td class="align-middle">{{ fighter.draws }}</td>
+              <td class="align-middle">{{ fighter.nc }}</td>
+            <td>
+                <a href="{% url 'promotions:offer' event.pk bout.pk fighter.pk %}"> <button data-toggle="tooltip" title="Add" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+            </td>
+            <td class="text-right">
+            </td>
+          </tr>
         {% empty %}
           <tr>
-            <td class="bg-light text-center font-italic" colspan="5">No fighters match the requirments.</td>
+            <td class="bg-light text-center font-italic" colspan="5">No fighters in the weightclass.</td>
           </tr>
         {% endfor %}
-</tbody>
-</table>
+                                </table>
+                            </div>{%endif%}
+
+                            <h5 style="top:500px">Available Fighters:</h5>
+                            <div class="asset-inner">
+                                <table>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Nickname</th>
+                                        <th>Weight</th>
+                                        <th>Rank</th>
+                                        <th>Wins</th>
+                                        <th>Losses</th>
+                                        <th>Draws</th>
+                                        <th>NC</th>
+                                    </tr>
+                                  {% for fighter in fighters %}
+          <tr>
+            <td class="align-middle">{{ fighter.fname }} {{fighter.lname}}</a></td>
+            <td class="align-middle">{{ fighter.nname }}</td>
+            <td class="align-middle">{{ fighter.weight }}</td>
+            <td class="align-middle">{{ fighter.rank }}</td>
+            <td class="align-middle">{{ fighter.wins }}</td>
+            <td class="align-middle">{{ fighter.losses }}</td>
+              <td class="align-middle">{{ fighter.draws }}</td>
+              <td class="align-middle">{{ fighter.nc }}</td>
+            <td>
+                <a href="{% url 'promotions:offer' event.pk bout.pk fighter.pk %}"> <button data-toggle="tooltip" title="Add" class="pd-setting-ed"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></a>
+            </td>
+            <td class="text-right">
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No fighters in the weightclass.</td>
+          </tr>
+        {% endfor %}
+                                </table>
+                            </div>
+                            <div class="custom-pagination">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright-area">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="footer-copy-right">
+                            <p>Copyright © 2019. All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jquery
+		============================================ -->
+    <script src="../../../../../static/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- bootstrap JS-->
+    <script src="../../../../../static/js/bootstrap.min.js"></script>
+    <!-- meanmenu JS-->
+    <script src="../../../../../static/js/jquery.meanmenu.js"></script>
+    <!-- sticky JS-->
+    <script src="../../../../../static/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS-->
+    <script src="../../../../../static/js/jquery.scrollUp.min.js"></script>
+    <!-- mCustomScrollbar JS-->
+    <script src="../../../../../static/js/scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../../../../../static/js/scrollbar/mCustomScrollbar-active.js"></script>
+    <!-- metisMenu JS-->
+    <script src="../../../../../static/js/metisMenu/metisMenu.min.js"></script>
+    <script src="../../../../../static/js/metisMenu/metisMenu-active.js"></script>
+    <!-- plugins JS-->
+    <script src="../../../../../static/js/plugins.js"></script>
+    <!-- main JS-->
+    <script src="../../../../../static/js/main.js"></script>
+</body>
+
+</html>
 {% endblock %}

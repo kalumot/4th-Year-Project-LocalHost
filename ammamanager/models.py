@@ -50,6 +50,7 @@ class Fighter(models.Model):
     draws = models.IntegerField(default=0)
     nc = models.IntegerField(default=0)
     points = models.IntegerField(default=0)
+    rank = models.IntegerField(default=0)
 
 
 

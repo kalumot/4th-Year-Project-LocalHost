@@ -9,6 +9,7 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
+from django.db.models import Q
 
 from ..decorators import promotion_required
 from ..forms import PromotionSignUpForm, BoutForm, FightForm
@@ -128,11 +129,16 @@ def BoutView(request, pk, bout_pk, *args, **kwargs):
     event = get_object_or_404(Event, pk=pk, owner=request.user)
     bout = get_object_or_404(Bout, pk=bout_pk, event=event)
     fighters = Fighter.objects.all().filter(weight=bout.weight)
+    recfighterstemp = None;
+    if bout.fighter1 is not None:
+        fighters = fighters.exclude(pk=bout.fighter1.pk)
+        recfighterstemp = fighters.filter(Q(rank=bout.fighter1.rank + 1) | Q(rank=bout.fighter1.rank - 1))
 
     return render(request, 'ammamanager/promotions/bout.html', {
         'event': event,
         'bout' : bout,
-        'fighters' : fighters
+        'fighters' : fighters,
+        'rec' : recfighterstemp
     })
 
 
@@ -156,6 +162,20 @@ def offer(request, pk, bout_pk, fighter_pk, *args, **kwargs):
 
     return redirect('promotions:bout', event.pk, bout.pk)
 
+@login_required
+@promotion_required
+def removeFighters(request, pk, bout_pk, *args, **kwargs):
+
+    event = get_object_or_404(Event, pk=pk, owner=request.user)
+    bout = get_object_or_404(Bout, pk=bout_pk, event=event)
+
+    bout.fighter1 = None
+
+    bout.fighter2 = None
+
+    bout.save()
+
+    return redirect('promotions:bout', event.pk, bout.pk)
 
 @login_required
 @promotion_required
@@ -165,12 +185,11 @@ def offer_fight(request, pk, bout_pk, *args, **kwargs):
     bout = get_object_or_404(Bout, pk=bout_pk, event=event)
     f1 = bout.fighter1
     f2 = bout.fighter2
+    if f1 is not None and f2 is not None:
+        offer1 = FightOffer(fighter = f1, opponent = f2, event = event, bout = bout)
+        offer1.save()
 
-    offer1 = FightOffer(fighter = f1, opponent = f2, event = event, bout = bout)
-
-    offer1.save()
-
-    return redirect('promotions:event', event.pk)
+    return redirect('promotions:bout', event.pk, bout.pk)
 
 
 @login_required
@@ -190,18 +209,31 @@ def finished_bout(request, pk, bout_pk, fighter_pk):
             fight.save()
             fight.bout.final = True
             fight.bout.save()
+
             winner.wins = winner.wins + 1
-            winner.points += 20
             winner.save()
             if winner == bout.fighter1:
                 bout.fighter2.losses = bout.fighter2.losses + 1
-                bout.fighter2.points -= 10
+                if fight.method == 'KO' or fight.method == 'SUB':
+                    bout.fighter2.points -= (bout.fighter1.points/100) * 1.2
+                    bout.fighter1.points += (bout.fighter2.points / 100) * 1.2
+                else:
+                    bout.fighter2.points -= (bout.fighter1.points / 100)
+                    bout.fighter1.points += (bout.fighter2.points / 100)
                 bout.fighter2.save()
+                bout.fighter1.save()
             else:
                 bout.fighter1.losses = bout.fighter1.losses + 1
-                bout.fighter1.points -= 10
+                if fight.method == 'KO' or fight.method == 'SUB':
+                    bout.fighter1.points -= (bout.fighter2.points/100) * 1.2
+                    bout.fighter2.points += (bout.fighter1.points / 100) * 1.2
+                else:
+                    bout.fighter1.points -= (bout.fighter2.points / 100) * 1
+                    bout.fighter2.points += (bout.fighter1.points / 100) * 1
                 bout.fighter1.save()
+                bout.fighter2.save()
 
+            ranking(bout.weight)
             messages.success(request, 'Records Updated')
             return redirect('promotions:event', event.pk)
     else:
@@ -209,9 +241,14 @@ def finished_bout(request, pk, bout_pk, fighter_pk):
 
     return render(request, 'ammamanager/promotions/bout_add_form.html', {'event': event, 'form': form})
 
-@login_required
-@promotion_required
-def ranking(weight):
 
+def ranking(weight):
+    fighters = Fighter.objects.all().filter(weight=weight).order_by('-points')
+    rank = 1
+
+    for x in fighters:
+        x.rank = rank
+        rank += 1
+        x.save()
 
     return 0

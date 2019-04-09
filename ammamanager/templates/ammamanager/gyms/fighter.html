@@ -5,6 +5,9 @@
            -- {{ fighter.fname }} --
             -- {{ fighter.weight }} --
 points: {{ fighter.points }}
+rank : {{ fighter.rank }}
+
+
 <a href="{% url 'gyms:fighter_delete' fighter.pk %}" class="btn btn-outline-secondary" role="button">Delete Fighter</a>
 
 <table class="table mb-0">
