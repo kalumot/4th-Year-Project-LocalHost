@@ -52,8 +52,6 @@ class Fighter(models.Model):
     points = models.IntegerField(default=0)
     rank = models.IntegerField(default=0)
 
-
-
     def __str__(self):
         return self.fname + " " + self.lname
 
@@ -65,7 +63,7 @@ class Bout(models.Model):
     fighter2 = models.ForeignKey(Fighter, on_delete=models.CASCADE, related_name='f2', blank=True, null=True)
     accepted1 = models.BooleanField(default=False)
     accepted2 = models.BooleanField(default=False)
-    final = models.BooleanField(default=False)
+    set = models.BooleanField(default=False)
 
     def __str__(self):
         return self.weight

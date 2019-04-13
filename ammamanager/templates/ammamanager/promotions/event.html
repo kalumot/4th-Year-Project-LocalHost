@@ -18,7 +18,7 @@
             <th>Fighter 2</th>
             <th>Accepted</th>
             <th>Weight</th>
-            <th>Final?</th>
+            <th>Set</th>
             <th>Make Fight</th>
           <th></th>
         </tr>
@@ -31,7 +31,7 @@
               <td class="align-middle"><a href="{% url 'promotions:event' event.id %}" class="btn btn-primary mb-3" role="button">{{ bout.fighter2 }}</a></td>
               <td class="align-middle">{{ bout.accepted2 }}</td>
               <td class="align-middle"><a href="{% url 'promotions:event' event.id %}" class="btn btn-primary mb-3" role="button">{{ bout.weight }}</a></td>
-              <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3" role="button">{{ bout.final }}</a></td>
+              <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3" role="button">{{ bout.set }}</a></td>
               <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3" role="button">Make</a></td>
           </tr>
         {% empty %}

@@ -105,6 +105,22 @@ def accept_fight(request, pk, offer_pk):
     else:
         bout.accepted2 = True
 
+    if bout.accepted1 == True and bout.accepted2 == True:
+        bout.set = True
+        offers = FightOffer.objects.all()
+
+        offersfighters1 = offers.filter(fighter=bout.fighter1)
+        offersopponents1 = offers.filter(opponent=bout.fighter2)
+        offers1 = offersfighters1 | offersopponents1
+        for o in offers1:
+            o.delete()
+
+        offersfighters2 = offers.filter(fighter=bout.fighter2)
+        offersopponents2 = offers.filter(opponent=bout.fighter1)
+        offers1 = offersfighters2 | offersopponents2
+        for o in offers1:
+            o.delete()
+
     bout.save()
 
 

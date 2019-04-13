@@ -14,14 +14,15 @@ rank : {{ fighter.rank }}
 <thead>
         <tr>
           <th>Offers</th>
-          <th></th>
+          <th>Fight</th>
         </tr>
       </thead>
 <tbody>
 {% for offer in offers %}
         <tr>
-         <td class="align-middle">
-             {{ offer.event.name }}  <a href="{% url 'gyms:accept_fight' fighter.pk offer.pk %}" class="btn btn-outline-secondary" role="button">Accept</a></td>
+         <td class="align-middle">{{ offer.event.name }}</td>
+        <td class="align-middle">{{ offer.bout.fighter1 }} vs {{ offer.bout.fighter2 }}  <a href="{% url 'gyms:accept_fight' fighter.pk offer.pk %}" class="btn btn-outline-secondary" role="button">Accept</a></td>
+
         </tr>
         {% empty %}
           <tr>
