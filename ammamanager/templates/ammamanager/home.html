@@ -1,6 +1,24 @@
-{% extends 'base.html' %}
+{% load static %}
+<head>
 
-{% block content %}
-  <h2>Home</h2>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="NavBar for Gym">
+    <meta name="author" content="Kalum">
 
-{% endblock %}
+    <title>AMMA Manager</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "nav.css" %}" rel="stylesheet">
+
+</head>
+<div style="padding-left: 35%;">
+    <div class="col-lg-12">
+<img src="{% static "mmahelperlogo.png" %}" alt="Logo"></div>
+    <div class="col-lg-12">
+<a href="{% url 'login' %}" class="btn btn-light" role="button">Log in</a>
+        <a href="{% url 'signup' %}" class="btn btn-primary" role="button">Sign up</a></div>
+</div>

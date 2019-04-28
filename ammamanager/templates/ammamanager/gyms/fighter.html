@@ -1,34 +1,138 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
-           -- {{ fighter.fname }} --
-            -- {{ fighter.weight }} --
-points: {{ fighter.points }}
-rank : {{ fighter.rank }}
+<main>
+    <h1>{{ fighter.fname }} {{ fighter.lname }}{%if fighter.available is True%}
+        <a href="{% url 'gyms:fighter_availability' fighter.pk %}" style="float: right;"
+           class="btn btn-outline-secondary" role="button">Make Unavailable</a>
+        {%else%}
+        <a href="{% url 'gyms:fighter_availability' fighter.pk %}" style="float: right;"
+           class="btn btn-outline-secondary" role="button">Make Available</a>
+        {%endif%}<a href="{% url 'gyms:fighter_delete' fighter.pk %}" style="float: right;"
+                    class="btn btn-outline-secondary" role="button">Delete Fighter</a></h1>
+    <h3>{{ fighter.weight }}: {{ fighter.rank }}  Points: {{fighter.points}}</h3>
 
 
-<a href="{% url 'gyms:fighter_delete' fighter.pk %}" class="btn btn-outline-secondary" role="button">Delete Fighter</a>
+    {%if fighter.available is False%}
 
-<table class="table mb-0">
-<thead>
+    {% for f in past %}
+    {%if f.event.finished == False%}
+    <h3>Upcoming Fight</h3>
+    <table class="table table-striped">
+        <thead>
         <tr>
-          <th>Offers</th>
-          <th>Fight</th>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Fight</th>
         </tr>
-      </thead>
-<tbody>
-{% for offer in offers %}
-        <tr>
-         <td class="align-middle">{{ offer.event.name }}</td>
-        <td class="align-middle">{{ offer.bout.fighter1 }} vs {{ offer.bout.fighter2 }}  <a href="{% url 'gyms:accept_fight' fighter.pk offer.pk %}" class="btn btn-outline-secondary" role="button">Accept</a></td>
+        </thead>
+        <tbody>
 
+        <tr>
+            <td class="align-middle">{{ f.event.name }}</td>
+            <td class="align-middle">{{ f.event.date }}</td>
+            <td class="align-middle">{{ f.fighter1 }} vs {{ f.fighter2 }}</td>
         </tr>
+        {% endif %}
         {% empty %}
-          <tr>
-            <td class="bg-light text-center font-italic" colspan="5">No offers</td>
-          </tr>
+        <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No Upcoming Fight</td>
+        </tr>
         {% endfor %}
-</tbody>
-</table>
+        {%endif%}
+        </tbody>
+    </table>
+        {%if fighter.available is True%}
+        <h3>Offers</h3>
+        <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Fight</th>
+
+        </tr>
+        </thead>
+
+        {% for offer in offers %}
+        <tbody>
+        <tr>
+            <td class="align-middle">{{ offer.event.name }}</td>
+            <td class="align-middle">{{ offer.event.date }}</td>
+            <td class="align-middle">{{ offer.bout.fighter1 }} vs {{ offer.bout.fighter2 }} <a
+                    href="{% url 'gyms:accept_fight' fighter.pk offer.pk %}" class="btn btn-outline-secondary"
+                    role="button">Accept</a><a href="{% url 'gyms:deny_fight' fighter.pk offer.pk %}"
+                                               class="btn btn-outline-secondary" role="button">Deny</a></td>
+        </tr>
+        </tbody>
+        {% empty %}
+        <tbody>
+        <tr>
+            <td class="bg-light text-center font-italic" colspan="5">No offers</td>
+        </tr>
+        </tbody>
+        {% endfor %}
+        {%endif%}
+
+    </table>
+    <h3>Fights</h3>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Opponent</th>
+                <th>Event</th>
+                <th>Method</th>
+                <th>Round</th>
+                <th>Time</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            {%for a in finished%}
+            {%if a.winner == fighter%}
+            <tr>
+                {%if a.method == 'DRAW'%}
+                <td>D</td>
+                {%elif a.method == 'NC'%}
+                <td>NC</td>
+                {%else%}
+                <td>W</td>
+                {%endif%}
+                <td>{{a.loser}}</td>
+                <td>{{a.bout.event}}</td>
+                <td>{{a.method}}</td>
+                <td>{{a.round}}</td>
+                <td>{{a.min}}:{{a.sec}}</td>
+                <td>{{a.bout.event.date}}</td>
+            </tr>
+            {%else%}
+            <tr>
+                {%if a.method == 'DRAW'%}
+                <td>D</td>
+                {%elif a.method == 'NC'%}
+                <td>NC</td>
+                {%else%}
+                <td>L</td>
+                {%endif%}
+                <td>{{a.winner}}</td>
+                <td>{{a.bout.event}}</td>
+                <td>{{a.method}}</td>
+                <td>{{a.round}}</td>
+                <td>{{a.min}}:{{a.sec}}</td>
+                <td>{{a.bout.event.date}}</td>
+            </tr>
+            {%endif%}
+            {% empty %}
+            <tr>
+                <td class="bg-light text-center font-italic" colspan="5">No Previous Fights</td>
+            </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+</main>
+
 {% endblock %}

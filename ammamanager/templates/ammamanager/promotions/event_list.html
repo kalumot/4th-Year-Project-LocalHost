@@ -1,24 +1,30 @@
-{% extends 'base.html' %}
-
+{% extends 'promotion_base.html' %}
+{% load static %}
 {% block content %}
-  <table class="table mb-0">
-      <thead>
+<main>
+    <table class="table mb-0">
+        <thead>
         <tr>
-          <th>Events</th>
-          <th></th>
+            <th>Events</th>
+            <th>Date</th>
+            <th>Finished</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         {% for event in events.all %}
-          <tr>
-              <td class="align-middle"><a href="{% url 'promotions:event' event.id %}" class="btn btn-primary mb-3" role="button">{{ event.name }}</a></td>
-          </tr>
+        <tr>
+            <td class="align-middle"><a href="{% url 'promotions:event' event.id %}" class="btn btn-primary mb-3"
+                                        role="button">{{ event.name }}</a></td>
+            <td class="align-middle">{{ event.date }}</td>
+            <td class="align-middle">{{ event.finished }}</td>
+        </tr>
         {% empty %}
-          <tr>
+        <tr>
             <td class="bg-light text-center font-italic" colspan="5">No events in the promotion.</td>
-          </tr>
+        </tr>
         {% endfor %}
-      </tbody>
+        </tbody>
     </table>
-  <a href="{% url 'promotions:event_add' %}" class="btn btn-primary mb-3" role="button">Add Event</a>
+    <a href="{% url 'promotions:event_add' %}" class="btn btn-primary mb-3" role="button">Add Event</a>
+</main>
 {% endblock %}

@@ -1,49 +1,42 @@
-{% extends 'base.html' %}
-
+{% extends 'promotion_base.html' %}
+{% load static %}
 {% block content %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Event Page</title>
-    <link rel="stylesheet" href="../../../../static/css/style.css">
-</head>
-<body>
-<h2>{{ event.name }}</h2>
+<main>
+    <h2>{{ event.name }}</h2>
+    <a href="{% url 'promotions:finish_event' event.id %}" class="btn btn-primary mb-3" role="button">Finish</a>
 
-<table class="table mb-0">
-      <thead>
+    <table class="table mb-0">
+        <thead>
         <tr>
-            <th>Fighter 1</th>
+            <th>Red Corner</th>
             <th>Accepted</th>
-            <th>Fighter 2</th>
+            <th>Blue Corner</th>
             <th>Accepted</th>
             <th>Weight</th>
-            <th>Set</th>
-            <th>Make Fight</th>
-          <th></th>
+            <th></th>
+            <th></th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         {% for bout in bouts.all %}
-          <tr>
-              <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3" role="button">{{ bout.fighter1 }}</a></td>
-              <td class="align-middle">{{ bout.accepted1 }}</td>
-              <td class="align-middle"><a href="{% url 'promotions:event' event.id %}" class="btn btn-primary mb-3" role="button">{{ bout.fighter2 }}</a></td>
-              <td class="align-middle">{{ bout.accepted2 }}</td>
-              <td class="align-middle"><a href="{% url 'promotions:event' event.id %}" class="btn btn-primary mb-3" role="button">{{ bout.weight }}</a></td>
-              <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3" role="button">{{ bout.set }}</a></td>
-              <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3" role="button">Make</a></td>
-          </tr>
+        <tr>
+            <td class="align-middle">{{ bout.fighter1 }}</td>
+            <td class="align-middle">{{ bout.accepted1 }}</td>
+            <td class="align-middle">{{ bout.fighter2 }}</td>
+            <td class="align-middle">{{ bout.accepted2 }}</td>
+            <td class="align-middle">{{ bout.weight }}</td>
+            {%if bout.fighter1 == None or bout.fighter2 == None %}
+            <td class="align-middle"><a href="{% url 'promotions:bout' event.pk bout.pk %}" class="btn btn-primary mb-3"
+                                        role="button">Make</a></td>
+            {% endif %}
+        </tr>
         {% empty %}
-          <tr>
+        <tr>
             <td class="bg-light text-center font-italic" colspan="5">No bouts in this event.</td>
-          </tr>
+        </tr>
         {% endfor %}
-      </tbody>
+        </tbody>
     </table>
-  <a href="{% url 'promotions:bout_add' event.pk %}" class="btn btn-primary mb-3" role="button">Add Bout</a>
-    <a href="{% url 'promotions:finished_event' event.pk %}" class="btn btn-primary mb-3" role="button">Finish Event</a>
-
-</body>
-</html>
+    <a href="{% url 'promotions:bout_add' event.pk %}" class="btn btn-primary mb-3" role="button">Add Bout</a>
+</main>
 {% endblock %}

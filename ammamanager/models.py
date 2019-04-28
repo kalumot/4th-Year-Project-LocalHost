@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from datetime import datetime
 from django.utils.html import escape, mark_safe
+from django.core.validators import MaxValueValidator
 
 
 WEIGHT_CLASSES = (
@@ -15,6 +17,14 @@ WEIGHT_CLASSES = (
     ('WSW', 'Womens Strawweight'),
     ('WBW', 'Womens Bantamweight'),
     ('WFW', 'Womens Featherweight'),
+)
+
+METHODS = (
+    ('KO', 'Knock out'),
+    ('SUB', 'Submission'),
+    ('DEC', 'Decision'),
+    ('DRAW', 'Draw'),
+    ('NC', 'No Contest'),
 )
 
 
@@ -34,13 +44,15 @@ class Gym(models.Model):
 class Event(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='events')
     name = models.CharField(max_length=255)
+    date = models.DateField(default=datetime.now())
+    finished = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
 
 class Fighter(models.Model):
-    gym = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fighters')
+    gym = models.ForeignKey(User, on_delete=models.CASCADE, related_name='fighters', null=True)
     fname = models.CharField(max_length=30)
     lname = models.CharField(max_length=30)
     nname = models.CharField(max_length=40)
@@ -49,8 +61,11 @@ class Fighter(models.Model):
     losses = models.IntegerField(default=0)
     draws = models.IntegerField(default=0)
     nc = models.IntegerField(default=0)
-    points = models.IntegerField(default=0)
+    points = models.IntegerField(default=1000)
     rank = models.IntegerField(default=0)
+    available = models.BooleanField(default=True)
+    createDate = models.DateField(default=datetime.now())
+    initialPointsBoost = models.IntegerField(default=0)
 
     def __str__(self):
         return self.fname + " " + self.lname
@@ -64,6 +79,7 @@ class Bout(models.Model):
     accepted1 = models.BooleanField(default=False)
     accepted2 = models.BooleanField(default=False)
     set = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.weight
@@ -84,10 +100,13 @@ class FinishedFight(models.Model):
     bout = models.ForeignKey(Bout,on_delete=models.CASCADE, related_name='finishedbout')
     event = models.ForeignKey(Event,on_delete=models.CASCADE, related_name='finishedevent')
     winner = models.ForeignKey(Fighter, on_delete=models.CASCADE, related_name='winner')
-    method = models.CharField(max_length=255)
-    round =  models.IntegerField(default=0)
-    min =  models.IntegerField(default=0)
-    sec =  models.IntegerField(default=0)
+    loser = models.ForeignKey(Fighter, on_delete=models.CASCADE, related_name='loser', default=None)
+    method = models.CharField(max_length=5, choices=METHODS, default='DEC')
+    round = models.IntegerField(default=1, validators=[MaxValueValidator(5)])
+    min = models.IntegerField(default=1)
+    sec = models.IntegerField(default=1)
+    winnerPoints = models.IntegerField(default=0)
+    loserPoints = models.IntegerField(default=0)
 
     def __str__(self):
         return self.winner

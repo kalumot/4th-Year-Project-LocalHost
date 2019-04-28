@@ -1,8 +1,26 @@
-{% extends 'base.html' %}
 
-{% block content %}
-  <h2>Sign up</h2>
-  <p class="lead">Select Account Type</p>
-  <a href="{% url 'gym_signup' %}" role="button">Gym</a>
-  <a href="{% url 'promotion_signup' %}" role="button">Promoter</a>
-{% endblock %}
+{% load static %}
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="NavBar for Gym">
+    <meta name="author" content="Kalum">
+
+    <title>AMMA Manager</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "nav.css" %}" rel="stylesheet">
+
+</head>
+
+<div style="padding-left: 41%;">
+<h2>Sign up</h2>
+<p class="lead">Select Account Type</p>
+<a href="{% url 'gym_signup' %}" class="btn btn-primary" role="button">Gym</a>
+<a href="{% url 'promotion_signup' %}" class="btn btn-primary" role="button">Promoter</a>
+    </div>
+

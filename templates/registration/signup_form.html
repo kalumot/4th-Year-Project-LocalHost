@@ -1,17 +1,29 @@
-{% extends 'base.html' %}
-
+{% load static %}
 {% load crispy_forms_tags %}
+<head>
 
-{% block content %}
-  <div class="row">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="NavBar for Gym">
+    <meta name="author" content="Kalum">
+
+    <title>AMMA Manager</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "nav.css" %}" rel="stylesheet">
+
+</head>
+<div class="row">
     <div class="col-md-8 col-sm-10 col-12">
-      <h2>Sign up as a {{ user_type }}</h2>
-      <form method="post" novalidate>
-        {% csrf_token %}
-        <input type="hidden" name="next" value="{{ next }}">
-        {{ form|crispy }}
-        <button type="submit">Sign up</button>
-      </form>
+        <h2>Sign up as a {{ user_type }}</h2>
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{{ next }}">
+            {{ form|crispy }}
+            <button type="submit">Sign up</button>
+        </form>
     </div>
-  </div>
-{% endblock %}
+</div>

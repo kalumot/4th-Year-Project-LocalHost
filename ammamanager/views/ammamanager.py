@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render
 from django.views.generic import TemplateView
+from ..models import Fighter, FinishedFight
+from django.db.models import Q
 
 
 class SignUpView(TemplateView):
@@ -17,3 +19,5 @@ def home(request):
         else:
             return redirect('gyms:gym_home')
     return render(request, 'ammamanager/home.html')
+
+

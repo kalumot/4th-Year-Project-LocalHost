@@ -1,9 +1,67 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-  {% include 'ammamanager/gyms/_header.html' with active='new' %}
-  <div class="card">
-    <h3>{{user.username}}</h3>
-  </div>
-  <a href="{% url 'gyms:fighter_list' %}" class="btn btn-primary mb-3" role="button">View Fighters</a>
+<head>
+    <meta charset="utf-8"/>
+    <title>Gym Home</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0-rc.1/Chart.js"></script>
+</head>
+<main style="padding-top: 50px;">
+    <h1 style="text-align: center;">{{user}}</h1>
+    {% if KO == 0 and SUB == 0 and DEC == 0 and lKO == 0 and lSUB == 0 and lDEC == 0 %}
+    <h3>Currently no stats available</h3>
+    {%else%}
+    <div id="contain">
+    <div style="float: left;" class="col-lg-6 col-sm-12">
+        <h3 style="text-align: center;">Method of Wins</h3>
+        <canvas id="myChart" width="500" height="150" style="float: left;"></canvas></div>
+    <div style="float: right;" class="col-lg-6 col-sm-12">
+        <h3 style="text-align: center;">Method of Losses</h3>
+        <canvas id="myChart2" width="500" height="150" style="float: left;"></canvas></div>
+    </div>
+    {%endif%}
+    <h3>Offers For: </h3>
+    <ul>
+        {%for o in offered %}
+        <li><a href="{% url 'gyms:fighter' o.pk %}">{{o}}</a></li>
+        {%empty%}
+        <li>No fighters currently have offers</li>
+        {%endfor%}
+    </ul>
+    <script>
+
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var ctx2 = document.getElementById("myChart2").getContext('2d');
+
+        var myChart = new Chart(ctx, {
+          type: 'pie',
+          data: {
+            labels: ["KO/TKO", "Submission", "DEC"],
+            datasets: [{
+              backgroundColor: [
+                "#FF5757",
+                "#3498db",
+                "#95a5a6",
+              ],
+              data: [{{KO}}, {{SUB}}, {{DEC}}]
+            }]
+          }
+        });
+        var myChart2 = new Chart(ctx2, {
+          type: 'pie',
+          data: {
+            labels: ["KO/TKO", "Submission", "DEC"],
+            datasets: [{
+              backgroundColor: [
+                "#FF5757",
+                "#3498db",
+                "#95a5a6",
+              ],
+              data: [{{lKO}}, {{lSUB}}, {{lDEC}}]
+            }]
+          }
+        });
+    </script>
+</main>
 {% endblock %}

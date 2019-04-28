@@ -34,6 +34,7 @@ ALLOWED_HOSTS = [u'ammahelper.azurewebsites.net','127.0.0.1']
 
 INSTALLED_APPS = [
     'django.contrib.auth',
+    'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'ammamanager',
     'project',
-    #'crispy_forms'
+    'crispy_forms',
+    'chartjs',
 ]
 
 MIDDLEWARE = [
@@ -79,18 +81,18 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'AMMA',
+        'USER': 'kalum@amma',
+        'PASSWORD': 'Neonking96',
+        'HOST': 'amma.database.windows.net',
     }
 }
 
 
 # Internationalization
-# https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
 
